@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aadarsh Kumar | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="./Assets/Favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Sora:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Sora', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            /* font-family: 'Inter', sans-serif; */
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #db9e2a;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+
+        /* Light Mode Scrollbar */
+        body.light-mode ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode ::-webkit-scrollbar-thumb {
+            background-color: #db9e2a;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        #nav-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        nav {
+            background-color: transparent;
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+
+        nav h1 {
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #0077cc;
+            font-weight: 600;
+            position: relative;
+        }
+
+        nav ul li a.active {
+            color: #005499;
+            border-bottom: 2px solid #005499;
+        }
+
+        section {
+            max-width: 900px;
+            margin: auto;
+            padding: 4rem 2rem;
+        }
+
+        h2 {
+            margin-top: 2rem;
+            font-size: 1.75rem;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+
+        .project {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-top: 1rem;
+        }
+
+        .project h3 {
+            margin-bottom: 0.3rem;
+        }
+
+        .project p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        #bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            filter: blur(8px) brightness(0.7);
+            transition: filter 0.5s ease;
+        }
+
+        body.light-mode #bg-image {
+            filter: blur(8px) brightness(1.1) invert(1);
+        }
+
+        #mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 1.3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 9999;
+        }
+
+        section {
+            background: rgba(0, 0, 0, 0.4);
+            /* almost transparent black */
+            color: #fff;
+            transition: background 0.5s ease, color 0.5s ease;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        /* Light Mode */
+        body.light-mode section {
+            background: rgba(255, 255, 255, 0.5);
+            /* almost transparent white */
+            color: #000;
+        }
+
+        /* Optional: smooth transition for other elements too */
+        body,
+        h2,
+        p,
+        li {
+            transition: color 0.5s ease;
+        }
+
+        /* Default (Dark Mode) */
+        body {
+            background-color: #111;
+            color: #fff;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        h1,
+        h2,
+        h3,
+        p,
+        li {
+            color: #fff;
+            transition: color 0.5s ease;
+        }
+
+        /* Section background */
+        section {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: auto;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+        }
+
+        /* Light Mode Styles */
+        body.light-mode {
+            background-color: #f9f9f9;
+            color: #000;
+        }
+
+        body.light-mode h1,
+        body.light-mode h2,
+        body.light-mode h3,
+        body.light-mode p,
+        body.light-mode li {
+            color: #000;
+        }
+
+        body.light-mode section {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #66ccff;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        nav ul li a.active {
+            color: #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        /* Light mode overrides */
+        body.light-mode nav ul li a {
+            color: #0077cc;
+        }
+
+        body.light-mode nav ul li a.active {
+            color: #005499;
+            border-bottom: 2px solid #005499;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            /* default link color */
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        /* ACTIVE LINK - DARK MODE */
+        nav ul li a.active {
+            color: #DB9E2A;
+            border-bottom: 2px solid #DB9E2A;
+
+            font-size: larger;
+            transition: transform 1.3s ease, color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        /* ALL LINKS - LIGHT MODE */
+        body.light-mode nav ul li a {
+            color: #070d11;
+        }
+
+        /* ACTIVE LINK - LIGHT MODE */
+        body.light-mode nav ul li a.active {
+            color: #DB9E2A;
+            border-bottom: 2px solid #DB9E2A;
+            font-size: larger;
+            transition: transform 0.3s ease, color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        .project {
+            background-color: rgba(0, 0, 0, 0.5);
+            /* dark mode */
+            color: #fff;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 1rem;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-mode .project {
+            background-color: rgba(255, 255, 255, 0.6);
+            /* light mode */
+            color: #000;
+        }
+
+        #mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ffffff;
+            /* dark mode background */
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 1.3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 9999;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-mode #mode-toggle {
+            background: #000000;
+            /* light mode background */
+            color: #111;
+        }
+
+        #mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        section {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: scale(1);
+            /* font-size: larger; */
+            /* slight magnify */
+        }
+
+        .online-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #DB9E2A;
+            /* or a brand color */
+            margin-left: 12px;
+        }
+
+        a[href*="github.com"] {
+            color: #DB9E2A;
+            text-decoration: none;
+            /* remove underline */
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.3s ease, color 0.3s ease;
+            display: inline-block;
+        }
+
+        a[href*="github.com"]:hover {
+            transform: scale(1.05);
+            /* subtle grow */
+            /* box-shadow: 0 0 8px rgba(219, 158, 42, 0.5); */
+            /* gold glow */
+            color: #c1881f;
+            /* slightly darker */
+        }
+
+        #contact-icons {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .icon-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+            perspective: 1000px;
+            /* <- moved here */
+        }
+
+        .icon-grid a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.3);
+            color: #db9e2a;
+            transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .icon-grid a:hover {
+            transform: rotateX(20deg) rotateY(180deg) scale(1.15);
+            background: #db9e2a;
+            color: #000;
+        }
+
+
+
+
+        body.light-mode .icon-grid a {
+            background: rgba(255, 255, 255, 0.3);
+            color: #db9e2a;
+        }
+
+        body.light-mode .icon-grid a:hover {
+            background: #db9e2a;
+            color: #ffffff;
+        }
+
+        #welcome-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            opacity: 1;
+            transition: opacity 1.5s ease;
+        }
+
+        .welcome-text {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #db9e2a;
+            text-align: center;
+            padding: 1.5rem 2rem;
+            border: 2px solid #db9e2a;
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(219, 158, 42, 0.4);
+            background: rgba(0, 0, 0, 0.5);
+            animation: fadeZoom 0.8s ease-out;
+        }
+
+        /* Animation for the welcome text */
+        @keyframes fadeZoom {
+            0% {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        #welcome-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Initial hidden state */
+        .scroll-section {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.6s ease-out;
+        }
+
+        /* Alternate direction using nth-of-type */
+        .scroll-section:nth-of-type(even) {
+            transform: translateX(-100px);
+        }
+
+        /* Visible state */
+        .scroll-section.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Default hidden state for animated items */
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        /* When section becomes visible, animate children */
+        .scroll-section.visible .stagger-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Optional delay for each item using nth-child */
+        .scroll-section.visible .stagger-item:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .scroll-section.visible .stagger-item:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .scroll-section.visible .stagger-item:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .scroll-section.visible .stagger-item:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .scroll-section.visible .stagger-item:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="welcome-screen">
+        <div class="welcome-text">WELCOME TO AADARSH KUMAR'S PORTFOLIO</div>
+    </div>
+    <img id="bg-image" src="./Assets/Background.png" alt="Background" />
+    <nav>
+        <div id="nav-bg"></div>
+        <h1>
+            Aadarsh Kumar &nbsp;&nbsp;|<span class="online-name">@CLOMDY</span>
+        </h1>
+        <ul>
+            <li><a href="#about" class="nav-link">About Me</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#certifications" class="nav-link">Certificates</a></li>
+            <li><a href="#education" class="nav-link">Education</a></li>
+            <li>
+                <a href="mailto:aadarshckumar@gmail.com" class="nav-link"
+                    onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=aadarshckumar@gmail.com','_blank'); return false;">
+                    Contact
+                </a>
+            </li>
+        </ul>
+
+    </nav>
+
+    <section id="about" class="scroll-section">
+        <h2>About Me</h2>
+        <p>
+            Creative and detail-oriented UI/Frontend Developer with hands-on experience in Angular, Flutter, and Ionic
+            frameworks. Skilled in building responsive, user-centric web and mobile applications with strong emphasis on
+            performance, design systems, and accessibility. Passionate about crafting digital experiences that are both
+            visually engaging and functionally robust.
+        </p>
+
+    </section>
+
+    <section id="skills" class="scroll-section">
+        <h2>Skills</h2>
+        <ul>
+            <li>Languages: JavaScript, TypeScript, Dart, Python, Java, C++</li>
+            <li>Frameworks & Web Tech: Angular, Ionic, Flutter, HTML/CSS, Bootstrap</li>
+            <li>Concepts: Responsive Design, Mobile-First Development, UX Feedback</li>
+            <li>Design Tools: Figma (basic), Adobe XD (basic), Adobe Photoshop</li>
+            <li>Video & Media Tools: Adobe Premiere Pro, Adobe After Effects, Wondershare Filmora</li>
+        </ul>
+
+    </section>
+
+    <section id="projects" class="scroll-section">
+        <h2>Projects</h2>
+
+        <div class="project stagger-item">
+            <h3>GAMEHUB</h3>
+            <p><strong>Tech:</strong> Angular, NodeJS, TypeScript</p>
+            <p>Game listing platform with optimized UI for data handling and admin editing.</p>
+            <p><a href="https://github.com/CLOMDY/GAMEHUB" target="_blank">GitHub</a></p>
+        </div>
+
+        <div class="project stagger-item">
+            <h3>QuickPark</h3>
+            <p><strong>Tech:</strong> Flutter, Dart, Firebase</p>
+            <p>Location-based carpooling and parking application with energy-optimized UX.</p>
+            <p><a href="https://github.com/CLOMDY/QuickPark" target="_blank">GitHub</a></p>
+        </div>
+
+        <div class="project stagger-item">
+            <h3>Resto</h3>
+            <p><strong>Tech:</strong> Ionic, Angular</p>
+            <p>Mobile-first restaurant web app with customizable templates for business owners.</p>
+            <p><a href="https://github.com/CLOMDY/Resto" target="_blank">GitHub</a></p>
+        </div>
+
+        <div class="project stagger-item">
+            <h3>ExpenseTracker</h3>
+            <p><strong>Tech:</strong> SQL, HTML, T-SQL</p>
+            <p>Budget tracking interface with visual analytics for categorized expenses.</p>
+            <p><a href="https://github.com/CLOMDY/ExpenseTracker" target="_blank">GitHub</a></p>
+        </div>
+    </section>
+
+    <section id="certifications" class="scroll-section">
+        <h2>Certifications</h2>
+        <ul>
+            <ul>
+                <li>Responsive Web Design – freeCodeCamp (2025)</li>
+                <li>Java Programming – Infosys Springboard (2025)</li>
+                <li>Full Stack MERN – Programming Pathshala (2023)</li>
+                <li>Social Teaching & Event Management – Vijyoti Trust (2022)</li>
+            </ul>
+
+        </ul>
+    </section>
+
+    <section id="education" class="scroll-section">
+        <h2>Education</h2>
+        <ul>
+            <li>MCA – Lovely Professional University, 2024–2026 (CGPA: 8.19)</li>
+            <li>BCA – Lovely Professional University, 2021–2024 (CGPA: 8.56)</li>
+        </ul>
+    </section>
+    <section id="contact-icons" class="scroll-section">
+        <h2>Contact Me</h2>
+        <div class="icon-grid">
+            <a href="tel:+919065877668" title="Phone"
+                onclick="return confirm('Call Aadarsh Kumar at +91-9065877668?');">
+                <i class="fas fa-phone-alt"></i>
+            </a>
+
+            <a href="mailto:aadarshckumar@gmail.com" title="Email"
+                onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=aadarshckumar@gmail.com','_blank'); return false;">
+                <i class="fas fa-envelope"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/clomdy/" target="_blank" title="LinkedIn"><i
+                    class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/CLOMDY" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://leetcode.com/u/CLOMDY/" target="_blank" title="LeetCode"><i
+                    class="fa-solid fa-code"></i></a>
+            <a href="https://www.hackerrank.com/profile/aadarshckumar" target="_blank" title="HackerRank"><i
+                    class="fab fa-hackerrank"></i></a>
+            <a href="https://www.instagram.com/clomdy/" target="_blank" title="Instagram"><i
+                    class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/clomdy" target="_blank" title="Facebook"><i
+                    class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/coolduderoxxxs" target="_blank" title="X"><i class="fab fa-twitter"></i></a>
+
+            <a href="https://www.reddit.com/user/AADARSH-_-KUMAR/" target="_blank" title="Reddit"><i
+                    class="fab fa-reddit-alien"></i></a>
+            <a href="https://discordapp.com/users/.clomdy" target="_blank" title="Discord"><i
+                    class="fab fa-discord"></i></a>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 Aadarsh Kumar. All rights reserved.
+    </footer>
+
+    <button id="mode-toggle" title="Toggle Theme">☀️</button>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+
+        // Fade out the welcome screen after 2.5 seconds
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                const welcome = document.getElementById("welcome-screen");
+                welcome.classList.add("fade-out");
+            }, 2500); // 2.5 seconds
+        });
+
+        const toggle = document.getElementById('mode-toggle');
+        const body = document.body;
+        let isDark = true;
+
+        function initParticles(color) {
+            if (window.pJSDom && window.pJSDom.length) {
+                window.pJSDom[0].pJS.fn.vendors.destroypJS();
+                window.pJSDom = [];
+            }
+
+            particlesJS('nav-bg', {
+                particles: {
+                    number: {
+                        value: 60,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: { value: color },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5 },
+                    size: { value: 3 },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: color,
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2
+                    }
+                },
+                interactivity: {
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "repulse"
+                        }
+                    },
+                    modes: {
+                        repulse: {
+                            distance: 100
+                        }
+                    }
+                },
+                retina_detect: true
+            });
+        }
+
+        // Initial call with white for dark mode
+        initParticles("#ffffff");
+
+        toggle.addEventListener('click', () => {
+            isDark = !isDark;
+            body.classList.toggle('light-mode', !isDark);
+            toggle.innerHTML = isDark ? '☀️' : '🌙';
+            initParticles(isDark ? "#ffffff" : "#000000"); // Update color based on mode
+        });
+
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll("nav ul li a[href^='#']");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === `#${current}`) {
+                    link.classList.add("active");
+                }
+            });
+        });
+
+        // Section zoom animation on view
+        // Section scroll-in (left/right alternation) animation
+        const sectionsToAnimate = document.querySelectorAll(".scroll-section");
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                } else {
+                    entry.target.classList.remove("visible"); // 🔁 Hide again when out of view
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        sectionsToAnimate.forEach(section => {
+            observer.observe(section);
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>
