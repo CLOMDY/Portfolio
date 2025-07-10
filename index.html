@@ -364,11 +364,16 @@
             opacity: 0;
             transform: scale(0.95);
             transition: opacity 0.5s ease, transform 0.5s ease;
-            margin-left: 20px;
-            margin-right: 20px;
-
-
+            margin: 1.5rem auto;
+            /* centers the section horizontally */
+            padding: 2rem 1rem;
+            /* adds space inside on small screens */
+            max-width: 900px;
+            /* ensures it doesn't stretch too wide */
+            box-sizing: border-box;
+            padding: 1rem;
         }
+
 
         section.visible {
             opacity: 1;
@@ -519,17 +524,19 @@
             pointer-events: none;
         }
 
-        /* Initial hidden state */
         .scroll-section {
             opacity: 0;
-            transform: translateX(100px);
+            transform: translateX(-100px);
+            /* 👈 change from 100px to -100px */
             transition: all 0.6s ease-out;
         }
 
-        /* Alternate direction using nth-of-type */
+        /* Optional: remove this alternation block if not needed */
         .scroll-section:nth-of-type(even) {
             transform: translateX(-100px);
+            /* 👈 keep or remove since all come from left now */
         }
+
 
         /* Visible state */
         .scroll-section.visible {
@@ -579,7 +586,7 @@
             border: none;
             color: #DB9E2A;
             z-index: 10000;
-            
+
         }
 
         @media (max-width: 924px) {
