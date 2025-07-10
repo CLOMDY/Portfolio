@@ -364,15 +364,22 @@
             opacity: 0;
             transform: scale(0.95);
             transition: opacity 0.5s ease, transform 0.5s ease;
-            margin: 1.5rem auto;
-            /* centers the section horizontally */
-            padding: 2rem 1rem;
-            /* adds space inside on small screens */
+            margin: 2.5rem auto;
+            /* centered on all screens */
+            padding: 2rem;
             max-width: 900px;
-            /* ensures it doesn't stretch too wide */
             box-sizing: border-box;
-            padding: 1rem;
         }
+
+        /* Mobile responsiveness */
+        @media (max-width: 924px) {
+            section {
+                margin: 1rem;
+                padding: 1rem 1rem;
+                /* less padding on small screens */
+            }
+        }
+
 
 
         section.visible {
@@ -383,12 +390,14 @@
         }
 
         .online-name {
-            font-size: 1.1rem;
+            font-size: clamp(0.6rem, 1.8vw, 1.1rem);
             font-weight: 600;
             color: #DB9E2A;
-            /* or a brand color */
             margin-left: 12px;
         }
+
+
+
 
         a[href*="github.com"] {
             color: #DB9E2A;
