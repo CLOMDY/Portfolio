@@ -166,6 +166,7 @@
             transition: filter 0.5s ease;
         }
 
+
         body.light-mode #bg-image {
             filter: blur(8px) brightness(1.1) invert(1);
         }
@@ -174,16 +175,20 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #fff;
+            background: #ffffff;
+            /* dark mode background */
+            color: #fff;
             border: none;
             border-radius: 50%;
             width: 45px;
             height: 45px;
             font-size: 1.3rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             cursor: pointer;
             z-index: 9999;
+            transition: background 0.3s ease, color 0.3s ease;
         }
+
 
         section {
             background: rgba(0, 0, 0, 0.4);
@@ -356,6 +361,7 @@
             opacity: 0;
             transform: scale(0.95);
             transition: opacity 0.5s ease, transform 0.5s ease;
+            
         }
 
         section.visible {
@@ -466,7 +472,20 @@
             box-shadow: 0 0 20px rgba(219, 158, 42, 0.4);
             background: rgba(0, 0, 0, 0.5);
             animation: fadeZoom 0.8s ease-out;
+
+            max-width: 90vw;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
+
+        @media (max-width: 600px) {
+            .welcome-text {
+                font-size: 1.4rem;
+                padding: 1rem;
+            }
+        }
+
+
 
         /* Animation for the welcome text */
         @keyframes fadeZoom {
@@ -537,6 +556,39 @@
         .scroll-section.visible .stagger-item:nth-child(5) {
             transition-delay: 0.5s;
         }
+
+        #hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #fff;
+            z-index: 10000;
+        }
+
+        @media (max-width: 924px) {
+            #hamburger {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background: rgba(0, 0, 0, 0.85);
+                flex-direction: column;
+                padding: 1rem;
+                border-radius: 8px;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+        }
+
+        
     </style>
 </head>
 
@@ -550,7 +602,8 @@
         <h1>
             Aadarsh Kumar &nbsp;&nbsp;|<span class="online-name">@CLOMDY</span>
         </h1>
-        <ul>
+        <button id="hamburger">☰</button>
+        <ul id="nav-links">
             <li><a href="#about" class="nav-link">About Me</a></li>
             <li><a href="#skills" class="nav-link">Skills</a></li>
             <li><a href="#projects" class="nav-link">Projects</a></li>
@@ -681,19 +734,19 @@
     <button id="mode-toggle" title="Toggle Theme">☀️</button>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-
-        // Fade out the welcome screen after 2.5 seconds
+        // Fade out welcome screen
         window.addEventListener("load", () => {
             setTimeout(() => {
                 const welcome = document.getElementById("welcome-screen");
                 welcome.classList.add("fade-out");
-            }, 2500); // 2.5 seconds
+            }, 2500);
         });
 
         const toggle = document.getElementById('mode-toggle');
         const body = document.body;
         let isDark = true;
 
+        // Initialize particles with dynamic color
         function initParticles(color) {
             if (window.pJSDom && window.pJSDom.length) {
                 window.pJSDom[0].pJS.fn.vendors.destroypJS();
@@ -742,22 +795,22 @@
             });
         }
 
-        // Initial call with white for dark mode
+        // Initial particles load (dark mode default)
         initParticles("#ffffff");
 
         toggle.addEventListener('click', () => {
             isDark = !isDark;
             body.classList.toggle('light-mode', !isDark);
             toggle.innerHTML = isDark ? '☀️' : '🌙';
-            initParticles(isDark ? "#ffffff" : "#000000"); // Update color based on mode
+            initParticles(isDark ? "#ffffff" : "#000000");
         });
 
+        // Active nav link on scroll
         const sections = document.querySelectorAll("section");
         const navLinks = document.querySelectorAll("nav ul li a[href^='#']");
 
         window.addEventListener("scroll", () => {
             let current = "";
-
             sections.forEach((section) => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.offsetHeight;
@@ -774,8 +827,7 @@
             });
         });
 
-        // Section zoom animation on view
-        // Section scroll-in (left/right alternation) animation
+        // Scroll animations
         const sectionsToAnimate = document.querySelectorAll(".scroll-section");
 
         const observer = new IntersectionObserver(entries => {
@@ -783,7 +835,7 @@
                 if (entry.isIntersecting) {
                     entry.target.classList.add("visible");
                 } else {
-                    entry.target.classList.remove("visible"); // 🔁 Hide again when out of view
+                    entry.target.classList.remove("visible"); // Optional: remove when out of view
                 }
             });
         }, {
@@ -794,8 +846,15 @@
             observer.observe(section);
         });
 
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinksList = document.getElementById('nav-links');
 
+        hamburger.addEventListener('click', () => {
+            navLinksList.classList.toggle('show');
+        });
     </script>
+
 
 
 </body>
