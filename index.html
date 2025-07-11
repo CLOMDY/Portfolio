@@ -79,6 +79,12 @@
         }
 
         nav {
+            position: fixed;
+            /* changed from sticky */
+            top: 0;
+            left: 0;
+            width: 100%;
+            /* ensure it spans full width */
             background-color: transparent;
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
@@ -86,10 +92,14 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1;
+            z-index: 1000;
+            /* ensure it stays above other elements */
         }
+
+        body {
+    padding-top: 80px; /* adjust depending on your nav height */
+}
+
 
 
         nav h1 {
@@ -755,6 +765,8 @@
                     class="fab fa-discord"></i></a>
         </div>
     </section>
+    <br>
+
 
     <footer>
         &copy; 2025 Aadarsh Kumar. All rights reserved.
