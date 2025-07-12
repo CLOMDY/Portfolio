@@ -14,8 +14,8 @@
 
     <style>
         body {
-            font-family: 'Inter', sans-serif; 
-            padding-top: 80px; 
+            font-family: 'Inter', sans-serif;
+            padding-top: 80px;
         }
 
         h1,
@@ -97,7 +97,7 @@
             /* ensure it stays above other elements */
         }
 
-        
+
 
 
 
@@ -408,7 +408,7 @@
 
 
 
-        .project a{
+        .project a {
             color: #DB9E2A;
             text-decoration: none;
             /* remove underline */
@@ -607,6 +607,7 @@
 
         }
 
+
         @media (max-width: 924px) {
             #hamburger {
                 display: block;
@@ -617,14 +618,35 @@
                 position: absolute;
                 top: 70px;
                 right: 20px;
-                background: rgba(0, 0, 0, 0.85);
                 flex-direction: column;
                 padding: 1rem;
-                border-radius: 8px;
+                border-radius: 12px;
+                background: rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             }
 
             nav ul.show {
                 display: flex;
+            }
+
+            /* Light mode overrides */
+            body.light-mode nav ul {
+                background: rgba(255, 255, 255, 0.4);
+                /* translucent white */
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            body.light-mode nav ul li a {
+                color: #111;
+            }
+
+            nav ul li a {
+                color: #fff;
+                /* default dark mode link color */
             }
         }
     </style>
