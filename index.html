@@ -815,13 +815,19 @@
         }
 
         .cv-viewer {
-            width: 90%;
+            width: 55%;
             height: 90%;
             background: #fff;
             border-radius: 12px;
             overflow: hidden;
             position: relative;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (max-width: 1000px) {
+            .cv-viewer {
+                width: 90%;
+            }
         }
 
         .cv-viewer iframe {
