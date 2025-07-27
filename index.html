@@ -11,11 +11,18 @@
     <link rel="icon" href="./Assets/Favicon.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Sora:wght@600;700&display=swap"
         rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
+
 
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            padding-top: 80px;
+            padding-top: 70px;
+        }
+
+        html {
+            scroll-padding-top: 80px;
+            /* adjust based on your nav height */
         }
 
         h1,
@@ -380,6 +387,11 @@
             box-sizing: border-box;
         }
 
+        section:last-of-type {
+            margin-bottom: 40rem;
+            /* or more if needed */
+        }
+
         /* Mobile responsiveness */
         @media (max-width: 924px) {
             section {
@@ -426,7 +438,7 @@
             /* slightly darker */
         }
 
-        #contact-icons {
+        #contacts {
             text-align: center;
             padding: 3rem 1rem;
         }
@@ -649,6 +661,188 @@
                 /* default dark mode link color */
             }
         }
+
+        .project {
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border-radius: 10px;
+            padding: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+
+            height: 300px;
+            /* 💡 Adjust as needed */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            transition: box-shadow 0.5s ease;
+            box-shadow: 0 0 0px transparent;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Hide preview by default */
+        .project-preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+            border-radius: 10px;
+
+            height: auto;
+            transform: translateY(0);
+            transition: transform 5s linear;
+
+        }
+
+        /* Show preview on hover */
+        .project:hover .project-preview {
+            opacity: 1;
+        }
+
+        .project:hover a {
+            background: #000;
+        }
+
+        /* Project content goes above the image */
+        .project-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Buttons stay bottom-right */
+        .project-links {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 3;
+        }
+
+        /* Button styling */
+        .project-links .btn {
+            padding: 0.4rem 0.75rem;
+            background: rgba(0, 0, 0, 0.1);
+            color: #db9e2a;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .project-links .btn:hover {
+            background: #db9e2a;
+            color: #000;
+        }
+
+        @media (max-width: 600px) {
+            .project {
+                height: auto;
+                /* Allow content to grow naturally on small screens */
+                min-height: 250px;
+            }
+
+            .project-preview {
+                object-fit: contain;
+            }
+        }
+
+        .project-preview-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* When hovered, scroll image up */
+        .project:hover .project-preview {
+            transform: translateY(-70%);
+            /* Adjust based on how long your image is */
+        }
+
+        .tap-to-preview {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #db9e2a;
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 4;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .project.show-tap-hint .tap-to-preview {
+            opacity: 1;
+        }
+
+        @media (min-width: 924px) {
+            .tap-to-preview {
+                display: none;
+            }
+        }
+
+        #cv-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            pointer-events: all;
+        }
+
+        .cv-viewer {
+            width: 90%;
+            height: 90%;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .cv-viewer iframe {
+            width: 100%;
+            height: 100%;
+            border: 4px solid #db9e2a;
+        }
+
+        #cv-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #db9e2a;
+            border: none;
+            font-size: 1.5rem;
+            padding: 0.2rem 0.6rem;
+            cursor: pointer;
+            z-index: 1000;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 
@@ -669,12 +863,15 @@
             <li><a href="#projects" class="nav-link">Projects</a></li>
             <li><a href="#certifications" class="nav-link">Certificates</a></li>
             <li><a href="#education" class="nav-link">Education</a></li>
+            <li><a href="#contacts" class="nav-link">Contacts</a></li>
             <li>
-                <a href="mailto:aadarshckumar@gmail.com" class="nav-link"
-                    onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=aadarshckumar@gmail.com','_blank'); return false;">
-                    Mail me
+                <a href="https://drive.google.com/file/d/1FnAisaOXl_Gi1Xx1G3jbHqimdSGZtYkr/preview" target="_blank"
+                    class="nav-link">
+                    View CV
                 </a>
+
             </li>
+
         </ul>
 
     </nav>
@@ -706,34 +903,74 @@
         <h2>Projects</h2>
 
         <div class="project stagger-item">
-            <h3>GAMEHUB</h3>
-            <p><strong>Tech:</strong> Angular, NodeJS, TypeScript</p>
-            <p>Game listing platform with optimized UI for data handling and admin editing.</p>
-            <p><a href="https://github.com/CLOMDY/GAMEHUB" target="_blank">GitHub &#8599;</a></p>
-            <p><a href="https://gamehub-zxsl.onrender.com/" target="_blank">Site &#8599;</a></p>
+            <div class="project-content">
+                <h3>GAMEHUB</h3>
+                <p><strong>Tech:</strong> Angular, NodeJS, TypeScript</p>
+                <p>Game listing platform with optimized UI for data handling and admin editing.</p>
+            </div>
+
+            <div class="project-preview-wrapper">
+                <img src="./Assets/Project/GAMEHUB.png" alt="GameHub Preview" class="project-preview" />
+            </div>
+            <div class="tap-to-preview">Tap to preview</div>
+            <div class="project-links">
+                <a href="https://github.com/CLOMDY/GAMEHUB" target="_blank" class="btn">GitHub &#8599;</a>
+                <a href="https://gamehub-zxsl.onrender.com/" target="_blank" class="btn">Site &#8599;</a>
+            </div>
+        </div>
+
+
+
+        <div class="project stagger-item">
+            <div class="project-content">
+                <h3>QuickPark</h3>
+                <p><strong>Tech:</strong> Flutter, Dart, Firebase</p>
+                <p>Location-based carpooling and parking application with energy-optimized UX.</p>
+            </div>
+
+            <!-- <div class="project-preview-wrapper">
+                <img src="./Assets/Project/QuickPark.png" alt="QuickPark Preview" class="project-preview" />
+            </div> -->
+
+            <div class="project-links">
+                <a href="https://github.com/CLOMDY/QuickPark" target="_blank" class="btn">GitHub &#8599;</a>
+            </div>
         </div>
 
         <div class="project stagger-item">
-            <h3>QuickPark</h3>
-            <p><strong>Tech:</strong> Flutter, Dart, Firebase</p>
-            <p>Location-based carpooling and parking application with energy-optimized UX.</p>
-            <p><a href="https://github.com/CLOMDY/QuickPark" target="_blank">GitHub &#8599;</a></p>
+            <div class="project-content">
+                <h3>Resto</h3>
+                <p><strong>Tech:</strong> Ionic, Angular</p>
+                <p>Mobile-first restaurant web app with customizable templates for business owners.</p>
+            </div>
+
+            <div class="project-preview-wrapper">
+                <img src="./Assets/Project/RESTO.png" alt="Resto Preview" class="project-preview" />
+            </div>
+            <div class="tap-to-preview">Tap to preview</div>
+
+            <div class="project-links">
+                <a href="https://github.com/CLOMDY/Resto" target="_blank" class="btn">GitHub &#8599;</a>
+                <a href="https://resto-9x4c.onrender.com/" target="_blank" class="btn">Site &#8599;</a>
+            </div>
         </div>
 
         <div class="project stagger-item">
-            <h3>Resto</h3>
-            <p><strong>Tech:</strong> Ionic, Angular</p>
-            <p>Mobile-first restaurant web app with customizable templates for business owners.</p>
-            <p><a href="https://github.com/CLOMDY/Resto" target="_blank">GitHub &#8599;</a></p>
-            <p><a href="https://resto-9x4c.onrender.com/" target="_blank">Site &#8599;</a></p>
+            <div class="project-content">
+                <h3>ExpenseTracker</h3>
+                <p><strong>Tech:</strong> SQL, HTML, T-SQL</p>
+                <p>Budget tracking interface with visual analytics for categorized expenses.</p>
+            </div>
+
+            <!-- <div class="project-preview-wrapper">
+                <img src="./Assets/Project/ExpenseTracker.png" alt="ExpenseTracker Preview" class="project-preview" />
+            </div> -->
+
+            <div class="project-links">
+                <a href="https://github.com/CLOMDY/ExpenseTracker" target="_blank" class="btn">GitHub &#8599;</a>
+            </div>
         </div>
 
-        <div class="project stagger-item">
-            <h3>ExpenseTracker</h3>
-            <p><strong>Tech:</strong> SQL, HTML, T-SQL</p>
-            <p>Budget tracking interface with visual analytics for categorized expenses.</p>
-            <p><a href="https://github.com/CLOMDY/ExpenseTracker" target="_blank">GitHub &#8599;</a></p>
-        </div>
     </section>
 
     <section id="certifications" class="scroll-section">
@@ -756,7 +993,7 @@
             <li>BCA – Lovely Professional University, 2021–2024 (CGPA: 8.56)</li>
         </ul>
     </section>
-    <section id="contact-icons" class="scroll-section">
+    <section id="contacts" class="scroll-section">
         <h2>Contact Me</h2>
         <div class="icon-grid">
             <a href="tel:+919065877668" title="Phone"
@@ -786,136 +1023,235 @@
                     class="fab fa-reddit-alien"></i></a>
         </div>
     </section>
-    <br>
 
 
     <footer>
         &copy; 2025 Aadarsh Kumar. All rights reserved.
     </footer>
 
+    <div id="cv-overlay">
+        <div class="cv-viewer">
+            <button id="cv-close">×</button>
+            <iframe src="https://drive.google.com/file/d/1FnAisaOXl_Gi1Xx1G3jbHqimdSGZtYkr/preview"
+                frameborder="0"></iframe>
+        </div>
+    </div>
+
+
     <button id="mode-toggle" title="Toggle Theme">☀️</button>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-        // Fade out welcome screen
         window.addEventListener("load", () => {
+            // Welcome screen fade out
             setTimeout(() => {
                 const welcome = document.getElementById("welcome-screen");
                 welcome.classList.add("fade-out");
             }, 2500);
-        });
 
-        const toggle = document.getElementById('mode-toggle');
-        const body = document.body;
-        let isDark = true;
+            const colorThief = new ColorThief();
+            const toggle = document.getElementById('mode-toggle');
+            const body = document.body;
+            let isDark = true;
 
-        // Initialize particles with dynamic color
-        function initParticles(color) {
-            if (window.pJSDom && window.pJSDom.length) {
-                window.pJSDom[0].pJS.fn.vendors.destroypJS();
-                window.pJSDom = [];
+            // Particle background
+            function initParticles(color) {
+                if (window.pJSDom && window.pJSDom.length) {
+                    window.pJSDom[0].pJS.fn.vendors.destroypJS();
+                    window.pJSDom = [];
+                }
+
+                particlesJS('nav-bg', {
+                    particles: {
+                        number: { value: 60, density: { enable: true, value_area: 800 } },
+                        color: { value: color },
+                        shape: { type: "circle" },
+                        opacity: { value: 0.5 },
+                        size: { value: 3 },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: color,
+                            opacity: 0.4,
+                            width: 1
+                        },
+                        move: { enable: true, speed: 2 }
+                    },
+                    interactivity: {
+                        events: { onhover: { enable: true, mode: "repulse" } },
+                        modes: { repulse: { distance: 100 } }
+                    },
+                    retina_detect: true
+                });
             }
 
-            particlesJS('nav-bg', {
-                particles: {
-                    number: {
-                        value: 60,
-                        density: {
-                            enable: true,
-                            value_area: 800
-                        }
-                    },
-                    color: { value: color },
-                    shape: { type: "circle" },
-                    opacity: { value: 0.5 },
-                    size: { value: 3 },
-                    line_linked: {
-                        enable: true,
-                        distance: 150,
-                        color: color,
-                        opacity: 0.4,
-                        width: 1
-                    },
-                    move: {
-                        enable: true,
-                        speed: 2
+            initParticles("#ffffff");
+
+            toggle.addEventListener('click', () => {
+                isDark = !isDark;
+                body.classList.toggle('light-mode', !isDark);
+                toggle.innerHTML = isDark ? '☀️' : '🌙';
+                initParticles(isDark ? "#ffffff" : "#000000");
+            });
+
+            // Navbar active link highlight on scroll
+            const sections = document.querySelectorAll("section");
+            const navLinks = document.querySelectorAll("nav ul li a[href^='#']");
+            window.addEventListener("scroll", () => {
+                let current = "";
+                sections.forEach((section) => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 200) {
+                        current = section.getAttribute("id");
                     }
-                },
-                interactivity: {
-                    events: {
-                        onhover: {
-                            enable: true,
-                            mode: "repulse"
-                        }
-                    },
-                    modes: {
-                        repulse: {
-                            distance: 100
+                });
+
+
+                navLinks.forEach((link) => {
+                    link.classList.remove("active");
+                    if (link.getAttribute("href") === `#${current}`) {
+                        link.classList.add("active");
+                    }
+                });
+            });
+
+            // Section animation
+            const sectionsToAnimate = document.querySelectorAll(".scroll-section");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    } else {
+                        entry.target.classList.remove("visible");
+                    }
+                });
+            }, { threshold: 0.2 });
+            sectionsToAnimate.forEach(section => observer.observe(section));
+
+            // Hamburger menu toggle
+            const hamburger = document.getElementById('hamburger');
+            const navLinksList = document.getElementById('nav-links');
+            hamburger.addEventListener('click', () => {
+                navLinksList.classList.toggle('show');
+            });
+
+            // Project image scroll and shadow
+            document.querySelectorAll('.project').forEach(project => {
+                const wrapper = project.querySelector('.project-preview-wrapper');
+                const img = project.querySelector('.project-preview');
+
+                if (!wrapper || !img) return; // skip if missing
+
+                // Mark loaded
+                if (img.complete) {
+                    img.setAttribute('data-loaded', 'true');
+                } else {
+                    img.addEventListener('load', () => {
+                        img.setAttribute('data-loaded', 'true');
+                    });
+                }
+
+                project.addEventListener('mouseenter', () => {
+                    const wrapperHeight = wrapper.offsetHeight;
+                    const imageHeight = img.scrollHeight;
+                    const maxScroll = imageHeight - wrapperHeight;
+
+                    if (maxScroll > 0) {
+                        img.style.transition = 'transform 5s linear 0.5s';
+                        img.style.transform = `translateY(-${maxScroll}px)`;
+                    }
+
+                    if (img.getAttribute('data-loaded') === 'true') {
+                        try {
+                            const dominantColor = colorThief.getColor(img);
+                            const rgb = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
+                            project.style.boxShadow = `0 0 30px 10px ${rgb}`;
+                        } catch (e) {
+                            console.warn("Color extraction failed", e);
                         }
                     }
-                },
-                retina_detect: true
+                });
+
+                project.addEventListener('mouseleave', () => {
+                    img.style.transition = 'none';
+                    img.style.transform = 'translateY(0)';
+                    void img.offsetWidth; // force reflow
+                    img.style.transition = 'transform 5s linear 0.5s';
+                    project.style.boxShadow = '0 0 0 transparent';
+                });
+            });
+
+        });
+
+        if (window.innerWidth < 924) {
+            const shownHints = new WeakSet(); // track projects that already showed the hint
+
+            const projectObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+                        const project = entry.target;
+
+                        if (shownHints.has(project)) return;
+
+                        const hasPreview = project.querySelector('.project-preview-wrapper');
+                        const hasSite = project.querySelector('.project-links a[href*="http"]');
+                        const hint = project.querySelector('.tap-to-preview');
+
+                        if (hasPreview && hasSite && hint) {
+                            project.classList.add('show-tap-hint');
+
+                            // Hide after 2 seconds
+                            setTimeout(() => {
+                                project.classList.remove('show-tap-hint');
+                            }, 2000);
+
+                            shownHints.add(project);
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.6
+            });
+
+            document.querySelectorAll('.project').forEach(project => {
+                projectObserver.observe(project);
             });
         }
 
-        // Initial particles load (dark mode default)
-        initParticles("#ffffff");
-
-        toggle.addEventListener('click', () => {
-            isDark = !isDark;
-            body.classList.toggle('light-mode', !isDark);
-            toggle.innerHTML = isDark ? '☀️' : '🌙';
-            initParticles(isDark ? "#ffffff" : "#000000");
+        document.querySelector('a[href*="drive.google.com"]').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('cv-overlay').style.display = 'flex';
         });
 
-        // Active nav link on scroll
-        const sections = document.querySelectorAll("section");
-        const navLinks = document.querySelectorAll("nav ul li a[href^='#']");
-
-        window.addEventListener("scroll", () => {
-            let current = "";
-            sections.forEach((section) => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                if (pageYOffset >= sectionTop - sectionHeight / 3) {
-                    current = section.getAttribute("id");
-                }
-            });
-
-            navLinks.forEach((link) => {
-                link.classList.remove("active");
-                if (link.getAttribute("href") === `#${current}`) {
-                    link.classList.add("active");
-                }
-            });
+        document.getElementById('cv-close').addEventListener('click', function () {
+            document.getElementById('cv-overlay').style.display = 'none';
         });
 
-        // Scroll animations
-        const sectionsToAnimate = document.querySelectorAll(".scroll-section");
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                } else {
-                    entry.target.classList.remove("visible"); // Optional: remove when out of view
-                }
-            });
-        }, {
-            threshold: 0.2
+        // Close button handler
+        document.getElementById("cv-close").addEventListener("click", () => {
+            document.getElementById("cv-overlay").style.display = "none";
         });
 
-        sectionsToAnimate.forEach(section => {
-            observer.observe(section);
+        // Prevent clicks from bubbling outside the viewer
+        document.querySelector(".cv-viewer").addEventListener("click", e => {
+            e.stopPropagation();
         });
 
-        // Hamburger menu toggle
-        const hamburger = document.getElementById('hamburger');
-        const navLinksList = document.getElementById('nav-links');
-
-        hamburger.addEventListener('click', () => {
-            navLinksList.classList.toggle('show');
+        // Optional: clicking outside the viewer closes it
+        document.getElementById("cv-overlay").addEventListener("click", () => {
+            document.getElementById("cv-overlay").style.display = "none";
         });
+
+        // Show overlay
+        document.getElementById("cv-overlay").style.display = "flex";
+        document.body.style.overflow = "hidden";
+
+        // Hide overlay
+        document.getElementById("cv-overlay").style.display = "none";
+        document.body.style.overflow = "";
+
+
     </script>
+
 
 
 
