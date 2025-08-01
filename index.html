@@ -13,6 +13,10 @@
         rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
     <link rel="stylesheet" href="./index.css">
+    <link rel="preload" as="image" href="./Assets/BackgroundDarkEnd.png">
+    <link rel="preload" as="image" href="./Assets/BackgroundLightEnd.png">
+
+
 </head>
 
 <body>
@@ -72,10 +76,11 @@
         <h2>Projects</h2>
         <div class="project stagger-item">
             <div class="project-content">
-                <h3>CARTOON WORLD</h3>
+                <h3>CARTOON WORLD <span style="font-size: 0.7rem; opacity: 0.5;">(Work in progress)</span></h3>
                 <p><strong>Tech:</strong> React, Bootstrap, JavaScript, CSS</p>
-                <p>Responsive cartoon streaming site with genre filters, carousel slider, and dynamic movie data handling.</p>
-              </div>
+                <p>Responsive cartoon streaming site with genre filters, carousel slider, and dynamic movie data
+                    handling.</p>
+            </div>
 
             <div class="project-preview-wrapper">
                 <img src="./Assets/Project/CARTOON WOLRD.png" alt="GameHub Preview" class="project-preview" />
@@ -104,24 +109,6 @@
             </div>
         </div>
 
-
-
-        <div class="project stagger-item">
-            <div class="project-content">
-                <h3>QuickPark</h3>
-                <p><strong>Tech:</strong> Flutter, Dart, Firebase</p>
-                <p>Location-based carpooling and parking application with energy-optimized UX.</p>
-            </div>
-
-            <!-- <div class="project-preview-wrapper">
-                <img src="./Assets/Project/QuickPark.png" alt="QuickPark Preview" class="project-preview" />
-            </div> -->
-
-            <div class="project-links">
-                <a href="https://github.com/CLOMDY/QuickPark" target="_blank" class="btn">GitHub &#8599;</a>
-            </div>
-        </div>
-
         <div class="project stagger-item">
             <div class="project-content">
                 <h3>Resto</h3>
@@ -137,6 +124,23 @@
             <div class="project-links">
                 <a href="https://github.com/CLOMDY/Resto" target="_blank" class="btn">GitHub &#8599;</a>
                 <a href="https://resto-9x4c.onrender.com/" target="_blank" class="btn">Site &#8599;</a>
+            </div>
+        </div>
+
+
+        <div class="project stagger-item">
+            <div class="project-content">
+                <h3>QuickPark</h3>
+                <p><strong>Tech:</strong> Flutter, Dart, Firebase</p>
+                <p>Location-based carpooling and parking application with energy-optimized UX.</p>
+            </div>
+
+            <!-- <div class="project-preview-wrapper">
+                <img src="./Assets/Project/QuickPark.png" alt="QuickPark Preview" class="project-preview" />
+            </div> -->
+
+            <div class="project-links">
+                <a href="https://github.com/CLOMDY/QuickPark" target="_blank" class="btn">GitHub &#8599;</a>
             </div>
         </div>
 
@@ -221,7 +225,7 @@
                 frameborder="0"></iframe>
         </div>
     </div>
-
+    <div id="bottom-sentinel"></div>
 
     <button id="mode-toggle" title="Toggle Theme">☀️</button>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
@@ -434,8 +438,47 @@
         document.getElementById("cv-overlay").style.display = "none";
         document.body.style.overflow = "";
 
+        const bgImage = document.getElementById('bg-image');
+        const bottomSentinel = document.getElementById('bottom-sentinel');
+        const isDarkMode = () => !document.body.classList.contains('light-mode');
+
+        let isEndActive = false; // prevent redundant transitions
+
+        const bottomObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !isEndActive) {
+                    isEndActive = true;
+                    bgImage.style.opacity = '0';
+
+                    setTimeout(() => {
+                        const endSrc = isDarkMode()
+                            ? './Assets/BackgroundDarkEnd.png'
+                            : './Assets/BackgroundLightEnd.png';
+                        bgImage.src = endSrc;
+                        document.body.classList.add('bg-end');
+                        bgImage.style.opacity = '1';
+                    }, 400); // Matches the CSS transition duration
+                } else if (!entry.isIntersecting && isEndActive) {
+                    isEndActive = false;
+                    bgImage.style.opacity = '0';
+
+                    setTimeout(() => {
+                        bgImage.src = './Assets/Background.png';
+                        document.body.classList.remove('bg-end');
+                        bgImage.style.opacity = '1';
+                    },400);
+                }
+            });
+        }, {
+            rootMargin: '0px 0px 350px 0px',
+            threshold: 0
+        });
+
+        bottomObserver.observe(bottomSentinel);
+
 
     </script>
+
 
 
 

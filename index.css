@@ -145,7 +145,7 @@ footer {
   text-align: center;
   padding: 2rem 0;
   font-size: 0.9rem;
-  color: #aaa;
+  color: #db9e2a;
 }
 
 #bg-image {
@@ -700,6 +700,20 @@ body.light-mode .icon-grid a:hover {
   color: #000;
 }
 
+body.light-mode .project-links .btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #db9e2a;
+}
+
+body.light-mode .project-links .btn:hover {
+  background: #db9e2a;
+  color: #fff;
+}
+
+body.light-mode .project:hover a {
+  background: #ffffff;
+}
+
 @media (max-width: 600px) {
   .project {
     height: auto;
@@ -810,4 +824,37 @@ body.light-mode .tap-to-preview {
   z-index: 1000;
   border-radius: 4px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  filter: blur(8px) brightness(0.7);
+  transition: opacity 0.8s ease-in-out; /* Smoother transition */
+}
+
+body.bg-end #bg-image {
+  filter: none !important; /* remove blur */
+  transition: filter 0.4s ease;
+}
+
+body.light-mode #bg-image {
+  filter: blur(8px) brightness(1.1) invert(1);
+}
+
+#bg-image {
+  object-position: center; /* default */
+  transition: object-position 0.6s ease, opacity 0.4s ease;
+}
+
+@media (max-width: 550px) {
+  body.bg-end #bg-image {
+    
+    object-position: 40% center; /* more right */
+  }
 }
