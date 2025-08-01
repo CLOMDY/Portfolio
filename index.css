@@ -701,7 +701,7 @@ body.light-mode .icon-grid a:hover {
 }
 
 body.light-mode .project-links .btn {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.4);
   color: #db9e2a;
 }
 
