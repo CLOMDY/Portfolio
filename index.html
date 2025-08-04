@@ -6,24 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aadarsh Kumar | Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="./Assets/Favicon.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Sora:wght@600;700&display=swap"
         rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
-    <link rel="stylesheet" href="./index.css">
-    <link rel="preload" as="image" href="./Assets/BackgroundDarkEnd.png">
-    <link rel="preload" as="image" href="./Assets/BackgroundLightEnd.png">
-
-
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preload" as="image" href="./Assets/BackgroundDarkEnd.jpg">
+    <link rel="preload" as="image" href="./Assets/BackgroundLightEnd.jpg">
 </head>
 
 <body>
     <div id="welcome-screen">
         <div class="welcome-text">WELCOME TO AADARSH KUMAR'S PORTFOLIO</div>
     </div>
-    <img id="bg-image" src="./Assets/Background.png" alt="Background" />
+    <img id="bg-image" src="./Assets/Background.jpg" alt="Background" />
     <nav>
         <div id="nav-bg"></div>
         <h1>
@@ -76,14 +72,14 @@
         <h2>Projects</h2>
         <div class="project stagger-item">
             <div class="project-content">
-                <h3>CARTOON WORLD <span style="font-size: 0.7rem; opacity: 0.5;">(Work in progress)</span></h3>
+                <h3>CARTOON WORLD <span class="work-status">(Work in progress)</span></h3>
                 <p><strong>Tech:</strong> React, Bootstrap, JavaScript, CSS</p>
                 <p>Responsive cartoon streaming site with genre filters, carousel slider, and dynamic movie data
                     handling.</p>
             </div>
 
             <div class="project-preview-wrapper">
-                <img src="./Assets/Project/CARTOON WOLRD.png" alt="GameHub Preview" class="project-preview" />
+                <img src="./Assets/Project/CARTOON WOLRD.jpg" alt="GameHub Preview" class="project-preview" />
             </div>
             <div class="tap-to-preview">Tap to preview</div>
             <div class="project-links">
@@ -100,7 +96,7 @@
             </div>
 
             <div class="project-preview-wrapper">
-                <img src="./Assets/Project/GAMEHUB.png" alt="GameHub Preview" class="project-preview" />
+                <img src="./Assets/Project/GAMEHUB.jpg" alt="GameHub Preview" class="project-preview" />
             </div>
             <div class="tap-to-preview">Tap to preview</div>
             <div class="project-links">
@@ -117,7 +113,7 @@
             </div>
 
             <div class="project-preview-wrapper">
-                <img src="./Assets/Project/RESTO.png" alt="Resto Preview" class="project-preview" />
+                <img src="./Assets/Project/RESTO.jpg" alt="Resto Preview" class="project-preview" />
             </div>
             <div class="tap-to-preview">Tap to preview</div>
 
@@ -136,7 +132,7 @@
             </div>
 
             <!-- <div class="project-preview-wrapper">
-                <img src="./Assets/Project/QuickPark.png" alt="QuickPark Preview" class="project-preview" />
+                <img src="./Assets/Project/QuickPark.jpg" alt="QuickPark Preview" class="project-preview" />
             </div> -->
 
             <div class="project-links">
@@ -152,7 +148,7 @@
             </div>
 
             <!-- <div class="project-preview-wrapper">
-                <img src="./Assets/Project/ExpenseTracker.png" alt="ExpenseTracker Preview" class="project-preview" />
+                <img src="./Assets/Project/ExpenseTracker.jpg" alt="ExpenseTracker Preview" class="project-preview" />
             </div> -->
 
             <div class="project-links">
@@ -229,260 +225,8 @@
 
     <button id="mode-toggle" title="Toggle Theme">☀️</button>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script>
-        window.addEventListener("load", () => {
-            // Welcome screen fade out
-            setTimeout(() => {
-                const welcome = document.getElementById("welcome-screen");
-                welcome.classList.add("fade-out");
-            }, 250);
-
-            const colorThief = new ColorThief();
-            const toggle = document.getElementById('mode-toggle');
-            const body = document.body;
-            let isDark = true;
-
-            // Particle background
-            function initParticles(color) {
-                if (window.pJSDom && window.pJSDom.length) {
-                    window.pJSDom[0].pJS.fn.vendors.destroypJS();
-                    window.pJSDom = [];
-                }
-
-                particlesJS('nav-bg', {
-                    particles: {
-                        number: { value: 60, density: { enable: true, value_area: 800 } },
-                        color: { value: color },
-                        shape: { type: "circle" },
-                        opacity: { value: 0.5 },
-                        size: { value: 3 },
-                        line_linked: {
-                            enable: true,
-                            distance: 150,
-                            color: color,
-                            opacity: 0.4,
-                            width: 1
-                        },
-                        move: { enable: true, speed: 2 }
-                    },
-                    interactivity: {
-                        events: { onhover: { enable: true, mode: "repulse" } },
-                        modes: { repulse: { distance: 100 } }
-                    },
-                    retina_detect: true
-                });
-            }
-
-            initParticles("#ffffff");
-
-            toggle.addEventListener('click', () => {
-                isDark = !isDark;
-                body.classList.toggle('light-mode', !isDark);
-                toggle.innerHTML = isDark ? '☀️' : '🌙';
-                initParticles(isDark ? "#ffffff" : "#000000");
-            });
-
-            // Navbar active link highlight on scroll
-            const sections = document.querySelectorAll("section");
-            const navLinks = document.querySelectorAll("nav ul li a[href^='#']");
-            window.addEventListener("scroll", () => {
-                let current = "";
-                sections.forEach((section) => {
-                    const sectionTop = section.offsetTop;
-                    if (window.scrollY >= sectionTop - 200) {
-                        current = section.getAttribute("id");
-                    }
-                });
-
-
-                navLinks.forEach((link) => {
-                    link.classList.remove("active");
-                    if (link.getAttribute("href") === `#${current}`) {
-                        link.classList.add("active");
-                    }
-                });
-            });
-
-            // Section animation
-            const sectionsToAnimate = document.querySelectorAll(".scroll-section");
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                    } else {
-                        entry.target.classList.remove("visible");
-                    }
-                });
-            }, { threshold: 0.2 });
-            sectionsToAnimate.forEach(section => observer.observe(section));
-
-            // Hamburger menu toggle
-            const hamburger = document.getElementById('hamburger');
-            const navLinksList = document.getElementById('nav-links');
-            hamburger.addEventListener('click', () => {
-                navLinksList.classList.toggle('show');
-            });
-
-            // Project image scroll and shadow
-            document.querySelectorAll('.project').forEach(project => {
-                const wrapper = project.querySelector('.project-preview-wrapper');
-                const img = project.querySelector('.project-preview');
-
-                if (!wrapper || !img) return; // skip if missing
-
-                // Mark loaded
-                if (img.complete) {
-                    img.setAttribute('data-loaded', 'true');
-                } else {
-                    img.addEventListener('load', () => {
-                        img.setAttribute('data-loaded', 'true');
-                    });
-                }
-
-                project.addEventListener('mouseenter', () => {
-                    const wrapperHeight = wrapper.offsetHeight;
-                    const imageHeight = img.scrollHeight;
-                    const maxScroll = imageHeight - wrapperHeight;
-
-                    if (maxScroll > 0) {
-                        img.style.transition = 'transform 5s linear 0.5s';
-                        img.style.transform = `translateY(-${maxScroll}px)`;
-                    }
-
-                    if (img.getAttribute('data-loaded') === 'true') {
-                        try {
-                            const dominantColor = colorThief.getColor(img);
-                            const rgb = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
-                            project.style.boxShadow = `0 0 30px 10px ${rgb}`;
-                        } catch (e) {
-                            console.warn("Color extraction failed", e);
-                        }
-                    }
-                });
-
-                project.addEventListener('mouseleave', () => {
-                    img.style.transition = 'none';
-                    img.style.transform = 'translateY(0)';
-                    void img.offsetWidth; // force reflow
-                    img.style.transition = 'transform 5s linear 0.5s';
-                    project.style.boxShadow = '0 0 0 transparent';
-                });
-            });
-
-        });
-
-        if (window.innerWidth < 924) {
-            const shownHints = new WeakSet(); // track projects that already showed the hint
-
-            const projectObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
-                        const project = entry.target;
-
-                        if (shownHints.has(project)) return;
-
-                        const hasPreview = project.querySelector('.project-preview-wrapper');
-                        const hasSite = project.querySelector('.project-links a[href*="http"]');
-                        const hint = project.querySelector('.tap-to-preview');
-
-                        if (hasPreview && hasSite && hint) {
-                            project.classList.add('show-tap-hint');
-
-                            // Hide after 2 seconds
-                            setTimeout(() => {
-                                project.classList.remove('show-tap-hint');
-                            }, 2000);
-
-                            shownHints.add(project);
-                        }
-                    }
-                });
-            }, {
-                threshold: 0.6
-            });
-
-            document.querySelectorAll('.project').forEach(project => {
-                projectObserver.observe(project);
-            });
-        }
-
-        document.querySelector('a[href*="drive.google.com"]').addEventListener('click', function (e) {
-            e.preventDefault();
-            document.getElementById('cv-overlay').style.display = 'flex';
-        });
-
-        document.getElementById('cv-close').addEventListener('click', function () {
-            document.getElementById('cv-overlay').style.display = 'none';
-        });
-
-        // Close button handler
-        document.getElementById("cv-close").addEventListener("click", () => {
-            document.getElementById("cv-overlay").style.display = "none";
-        });
-
-        // Prevent clicks from bubbling outside the viewer
-        document.querySelector(".cv-viewer").addEventListener("click", e => {
-            e.stopPropagation();
-        });
-
-        // Optional: clicking outside the viewer closes it
-        document.getElementById("cv-overlay").addEventListener("click", () => {
-            document.getElementById("cv-overlay").style.display = "none";
-        });
-
-        // Show overlay
-        document.getElementById("cv-overlay").style.display = "flex";
-        document.body.style.overflow = "hidden";
-
-        // Hide overlay
-        document.getElementById("cv-overlay").style.display = "none";
-        document.body.style.overflow = "";
-
-        const bgImage = document.getElementById('bg-image');
-        const bottomSentinel = document.getElementById('bottom-sentinel');
-        const isDarkMode = () => !document.body.classList.contains('light-mode');
-
-        let isEndActive = false; // prevent redundant transitions
-
-        const bottomObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !isEndActive) {
-                    isEndActive = true;
-                    bgImage.style.opacity = '0';
-
-                    setTimeout(() => {
-                        const endSrc = isDarkMode()
-                            ? './Assets/BackgroundDarkEnd.png'
-                            : './Assets/BackgroundLightEnd.png';
-                        bgImage.src = endSrc;
-                        document.body.classList.add('bg-end');
-                        bgImage.style.opacity = '1';
-                    }, 400); // Matches the CSS transition duration
-                } else if (!entry.isIntersecting && isEndActive) {
-                    isEndActive = false;
-                    bgImage.style.opacity = '0';
-
-                    setTimeout(() => {
-                        bgImage.src = './Assets/Background.png';
-                        document.body.classList.remove('bg-end');
-                        bgImage.style.opacity = '1';
-                    },400);
-                }
-            });
-        }, {
-            rootMargin: '0px 0px 350px 0px',
-            threshold: 0
-        });
-
-        bottomObserver.observe(bottomSentinel);
-
-
-    </script>
-
-
-
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
