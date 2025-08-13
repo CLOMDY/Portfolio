@@ -674,12 +674,6 @@ body.bg-end #bg-image {
   transition: filter 0.4s ease;
 }
 
-@media (max-width: 550px) {
-  body.bg-end #bg-image {
-    object-position: 40% center;
-  }
-}
-
 .work-status {
   font-size: clamp(0.6rem, 1.5vw, 0.7rem);
   opacity: 0.5;
